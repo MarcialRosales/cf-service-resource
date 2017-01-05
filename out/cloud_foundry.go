@@ -9,6 +9,7 @@ type PAAS interface {
 	Login(api string, username string, password string, insecure bool) error
 	Target(organization string, space string) error
 	CreateService(service string, plan string, instanceName string) error
+	CreateUserProvidedService(instanceName string, credentials string) error
 	BindService(currentAppName string, instanceName string) error
 	RestageApp(currentAppName string) error
 }
@@ -40,6 +41,13 @@ func (cf *CloudFoundry) Target(organization string, space string) error {
 func (cf *CloudFoundry) CreateService(service string, plan string, instanceName string) error {
 	args := []string{}
 	args = append(args, "create-service", service, plan, instanceName)
+
+	return cf.cf(args...).Run()
+}
+
+func (cf *CloudFoundry) CreateUserProvidedService(instanceName string, credentials string) error {
+	args := []string{}
+	args = append(args, "create-user-provided-service", instanceName, "-p", credentials)
 
 	return cf.cf(args...).Run()
 }

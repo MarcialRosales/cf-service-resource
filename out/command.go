@@ -35,29 +35,42 @@ func (command *Command) Run(request Request) (Response, error) {
 		return Response{}, err
 	}
 
-	err = command.paas.CreateService(
-		request.Params.Service,
-		request.Params.Plan,
-		request.Params.InstanceName,
-	)
+  if request.Params.Credentials != "" {
+		err = command.paas.CreateUserProvidedService(
+			request.Params.InstanceName,
+			request.Params.Credentials,
+		)
+	} else {
+		err = command.paas.CreateService(
+			request.Params.Service,
+			request.Params.Plan,
+			request.Params.InstanceName,
+		)
+	}
+
 	if err != nil {
 		return Response{}, err
 	}
 
-	err = command.paas.BindService(
-		request.Params.CurrentAppName,
-		request.Params.InstanceName,
-	)
-	if err != nil {
-		return Response{}, err
+	if (request.Params.CurrentAppName != "") {
+
+			err = command.paas.BindService(
+				request.Params.CurrentAppName,
+				request.Params.InstanceName,
+			)
+			if err != nil {
+				return Response{}, err
+			}
+
+			err = command.paas.RestageApp(
+				request.Params.CurrentAppName,
+			)
+			if err != nil {
+				return Response{}, err
+			}
+
 	}
 
-	err = command.paas.RestageApp(
-		request.Params.CurrentAppName,
-	)
-	if err != nil {
-		return Response{}, err
-	}
 
 	return Response{
 		Version: resource.Version{

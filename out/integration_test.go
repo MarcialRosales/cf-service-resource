@@ -308,7 +308,7 @@ var _ = Describe("Out", func() {
                                 Ω(session.Err).Should(gbytes.Say(errMsg))
                         })
                 })
-
+/*
                 Context("manifest and current_app_name is empty", func() {
                         BeforeEach(func() {
                                 request.Params.ManifestPath = ""
@@ -329,5 +329,6 @@ var _ = Describe("Out", func() {
                                 Ω(session.Err).Should(gbytes.Say(errMsg))
                         })
                 })
+*/
 	})
 })

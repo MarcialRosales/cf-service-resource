@@ -13,6 +13,7 @@ type Params struct {
 	InstanceName     string    `json:"instance_name"`
 	ManifestPath     string    `json:"manifest"`
 	CurrentAppName   string    `json:"current_app_name"`
+	Credentials      string    `json:"credentials"`
 }
 
 type Response struct {

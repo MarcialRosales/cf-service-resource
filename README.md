@@ -27,7 +27,7 @@ based on
 #### Parameters
 
 * `service`: *Required.* Service name.
-* `plan`: *Required.* Plan name of the service. 
+* `plan`: *Required.* Plan name of the service.
 * `instance_name`: *Required.* Service instance name.
 * `manifest`: *(Either) Required.* Path to an application manifest file.
 * `current_app_name`: *(Either) Required.* The name of the application to bind service.  
@@ -88,6 +88,20 @@ jobs:
         service: p-mysql
         plan: 512mb
         instance_name: mysql-test
+
+```
+
+The example above creates a service instance on the `p-mysql` service and binds the service instance to the application referenced in the manifest file.
+
+If we wanted to create a `User Provided Service` instance and we don't want to bind it specifically to any application we would use this parameters instead:
+```yaml
+---
+  ...
+  on_success:
+    put: foobar-cf-service
+    params:      
+      instance_name: payment-webservice
+      credentials: { "url": "http://example.com", "jwt" : "dknfk7894754hf"}
 
 ```
 

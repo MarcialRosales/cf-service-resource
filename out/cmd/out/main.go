@@ -25,18 +25,18 @@ func main() {
 	}
 
 	var err error
-	if request.Params.Service == "" {
-		err = errors.New("service")
-	}
-	if request.Params.Plan == "" {
-		err = errors.New("plan")
-	}
 	if request.Params.InstanceName == "" {
 		err = errors.New("instance_name")
 	}
-	if request.Params.ManifestPath == "" && request.Params.CurrentAppName == "" {
-		err = errors.New("either manifest/current_app_name")
+	if request.Params.Service == "" && request.Params.Credentials == "" {
+		err = errors.New("service")
 	}
+	if request.Params.Service != "" && request.Params.Plan == "" {
+		err = errors.New("plan")
+	}
+//	if request.Params.ManifestPath == "" && request.Params.CurrentAppName == "" {
+//		err = errors.New("either manifest/current_app_name")
+//	}
 	if err != nil {
 		fatal("parameter required", err)
 	}

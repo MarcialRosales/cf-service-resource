@@ -37,6 +37,15 @@ type FakePAAS struct {
 	createServiceReturns struct {
 		result1 error
 	}
+	CreateUserProvidedServiceStub  func(instanceName string, credentials string) error
+	createUserProvidedServiceMutex sync.RWMutex
+	createUserProvidedServiceArgsForCall []struct {
+		instanceName string
+		credentials  string
+	}
+	createUserProvidedServiceReturns struct {
+		result1 error
+	}
 	BindServiceStub  func(currentAppName string, instanceName string) error
 	bindServiceMutex sync.RWMutex
 	bindServiceArgsForCall []struct {
@@ -157,6 +166,32 @@ func (fake *FakePAAS) CreateServiceReturns(result1 error) {
 		result1 error
 	}{result1}
 }
+
+func (fake *FakePAAS) CreateUserProvidedService(instanceName string, credentials string) error {
+	fake.createUserProvidedServiceMutex.Lock()
+	fake.createUserProvidedServiceArgsForCall = append(fake.createUserProvidedServiceArgsForCall, struct {
+		instanceName string
+		credentials  string
+	}{instanceName, credentials})
+	fake.createUserProvidedServiceMutex.Unlock()
+	if fake.CreateUserProvidedServiceStub != nil {
+		return fake.CreateUserProvidedServiceStub(instanceName, credentials)
+	} else {
+		return fake.createUserProvidedServiceReturns.result1
+	}
+}
+func (fake *FakePAAS) CreateUserProvidedServiceCallCount() int {
+	fake.createUserProvidedServiceMutex.RLock()
+	defer fake.createUserProvidedServiceMutex.RUnlock()
+	return len(fake.createUserProvidedServiceArgsForCall)
+}
+func (fake *FakePAAS) CreateUserProvidedServiceArgsForCall(i int) (string, string) {
+	fake.createUserProvidedServiceMutex.RLock()
+	defer fake.createUserProvidedServiceMutex.RUnlock()
+	return fake.createUserProvidedServiceArgsForCall[i].instanceName, fake.createUserProvidedServiceArgsForCall[i].credentials
+}
+
+
 
 func (fake *FakePAAS) BindService(currentAppName string, instanceName string) error {
 	fake.bindServiceMutex.Lock()
