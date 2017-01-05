@@ -100,7 +100,7 @@ jobs:
 
 The example above creates a service instance on the `p-mysql` service and binds the service instance to the application referenced in the manifest file.
 
-If we wanted to create a `User Provided Service` instance and we don't want to bind it specifically to any application we would use this parameters instead:
+If we wanted to create a `User Provided Service` instance and we don't want to bind it specifically to any application we would use these parameters instead:
 ```yaml
 ---
   ...
