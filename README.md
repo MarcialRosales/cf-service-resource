@@ -41,8 +41,6 @@ To create a user provided service instance:
 When both are listed, `manifest` is used.
 
 
-* `delete`: *Optional.* Default `false`. (not yet implemented)
-
 ## Pipeline example
 
 ```yaml
