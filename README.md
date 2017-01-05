@@ -26,12 +26,21 @@ based on
 
 #### Parameters
 
+To create a service instance:
 * `service`: *Required.* Service name.
 * `plan`: *Required.* Plan name of the service.
 * `instance_name`: *Required.* Service instance name.
-* `manifest`: *(Either) Required.* Path to an application manifest file.
-* `current_app_name`: *(Either) Required.* The name of the application to bind service.  
+
+To create a user provided service instance:
+* `instance_name`: *Required.* Service instance name.
+* `credentials`: *Required.* The credentials for the service instance.
+
+(*Optional*) To bind the service to an application and stage the app:
+* `manifest`: *(Either) Required* Path to an application manifest file.
+* `current_app_name`: *(Either) Optional.* The name of the application to bind service.  
 When both are listed, `manifest` is used.
+
+
 * `delete`: *Optional.* Default `false`. (not yet implemented)
 
 ## Pipeline example
