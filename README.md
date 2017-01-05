@@ -49,7 +49,7 @@ resource_types:
   - name: cf-service-resource
     type: docker-image
     source:
-      repository: idahobean/cf-service-resource
+      repository: marcialfrg/cf-service-resource
 
 resources:
   - name: resource-web-app
